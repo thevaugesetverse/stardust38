@@ -1,818 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday My Love!</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: #5b011b;
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 800px;
-            text-align: center;
-            position: relative;
-            z-index: 10;
-        }
-        
-        .slide {
-            display: none;
-            background: rgba(90, 25, 40, 0.8);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 30px;
-        }
-        
-        #slide1 {
-            display: block;
-        }
-        
-        h1 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            color: #ffd7df;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        p {
-            font-size: 1.4rem;
-            line-height: 1.6;
-            margin-bottom: 25px;
-            color: #f9f9f9;
-        }
-        
-        .btn {
-            background: linear-gradient(to right, #ff6b6b, #ff8e8e);
-            color: white;
-            border: none;
-            padding: 16px 40px;
-            font-size: 1.4rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .btn:active {
-            transform: translateY(1px);
-        }
-        
-        .hearts {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            top: 0;
-            left: 0;
-            z-index: 5;
-        }
-        
-        .heart {
-            position: absolute;
-            font-size: 20px;
-            opacity: 0;
-            color: #ff6b6b;
-            animation: floatHeart 5s ease-in-out forwards;
-        }
-        
-        @keyframes floatHeart {
-            0% {
-                opacity: 0;
-                transform: translate(0, 0) scale(0);
-            }
-            10% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                transform: translate(var(--tx), var(--ty)) scale(1);
-            }
-        }
-        
-        .firework {
-            position: fixed;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            pointer-events: none;
-            animation: fireworkAnimation 1s ease-out forwards;
-            z-index: 5;
-        }
-        
-        @keyframes fireworkAnimation {
-            0% {
-                transform: translate(0, 0);
-                opacity: 1;
-                width: 5px;
-                height: 5px;
-            }
-            100% {
-                transform: translate(var(--x), var(--y));
-                opacity: 0;
-                width: 200px;
-                height: 200px;
-            }
-        }
-        
-        .photo-container {
-            display: flex;
-            justify-content: center;
-            margin: 30px 0;
-        }
-        
-        .photo-frame {
-            width: 300px;
-            height: 300px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            border: 5px solid #ffd7df;
-            position: relative;
-        }
-        
-        .photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .photo-counter {
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 1rem;
-        }
-        
-        .input-container {
-            margin: 30px 0;
-        }
-        
-        input {
-            padding: 15px 20px;
-            width: 250px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .message {
-            font-size: 1.8rem;
-            margin: 30px 0;
-            min-height: 80px;
-            color: #ffd7df;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-        
-        .birthday-wish {
-            font-size: 2.5rem;
-            margin: 40px 0;
-            color: #ff8e8e;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            line-height: 1.4;
-        }
-        
-        .final-gift {
-            margin-top: 30px;
-            font-size: 1.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            display: inline-block;
-        }
-        
-        .navigation-dots {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        
-        .dot {
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-        }
-        
-        .dot.active {
-            background: #ff6b6b;
-            transform: scale(1.3);
-        }
-        
-        .love-confirmation {
-            font-size: 3.5rem;
-            margin: 100px 0;
-            color: #ffd7df;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
-        }
-        
-        .gift-container {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            margin: 50px 0;
-        }
-        
-        .gift-box {
-            width: 180px;
-            height: 180px;
-            background: #222;
-            border-radius: 10px;
-            position: relative;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-        
-        .gift-box:hover {
-            transform: scale(1.05);
-        }
-        
-        .gift-lid {
-            position: absolute;
-            width: 200px;
-            height: 40px;
-            background: #d32f2f;
-            top: -20px;
-            border-radius: 5px;
-        }
-        
-        .gift-bow {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background: #d32f2f;
-            border-radius: 50%;
-            z-index: 2;
-        }
-        
-        .gift-bow::before, .gift-bow::after {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 30px;
-            background: #d32f2f;
-            border-radius: 5px;
-        }
-        
-        .gift-bow::before {
-            transform: rotate(45deg);
-            top: 10px;
-            left: -15px;
-        }
-        
-        .gift-bow::after {
-            transform: rotate(-45deg);
-            top: 10px;
-            right: -15px;
-        }
-        
-        .bloody-message {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 5rem;
-            color: #ff0000;
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.7), 0 0 20px rgba(255, 0, 0, 0.5);
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 100;
-            animation: bloodyPulse 2s infinite, fadeIn 1.5s ease-in-out;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 3px;
-            flex-direction: column;
-        }
-        
-        .blood-drip {
-            position: absolute;
-            width: 10px;
-            height: 100px;
-            background: linear-gradient(to bottom, #ff0000, transparent);
-            border-radius: 5px;
-            animation: drip 3s infinite;
-        }
-        
-        @keyframes bloodyPulse {
-            0% { opacity: 0.8; }
-            50% { opacity: 1; }
-            100% { opacity: 0.8; }
-        }
-        
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-        
-        @keyframes drip {
-            0% { transform: translateY(-100px); opacity: 0; }
-            10% { opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
-        
-        .romantic-message {
-            font-size: 1.6rem;
-            line-height: 1.8;
-            text-align: left;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 30px;
-            border-radius: 15px;
-            margin: 30px 0;
-            border-left: 5px solid #ff6b6b;
-        }
-        
-        .signature {
-            text-align: right;
-            font-style: italic;
-            margin-top: 20px;
-            font-size: 1.8rem;
-            color: #ffd7df;
-        }
-        
-        .rules-box {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 25px;
-            border-radius: 15px;
-            margin: 30px 0;
-            border: 2px solid #ff6b6b;
-        }
-        
-        .judgement-text {
-            font-size: 3rem;
-            margin: 50px 0;
-            color: #ffd7df;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .hate-message {
-            font-size: 3rem;
-            color: #ff6b6b;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-            animation: shake 0.5s ease-in-out;
-        }
-        
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            50% { transform: translateX(10px); }
-            75% { transform: translateX(-10px); }
-            100% { transform: translateX(0); }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>For Your Eyes Only 💖</title>
+  <!-- Extra no-index safety -->
+  <meta name="robots" content="noindex,nofollow">
+  <style>
+    :root { --bg1:#3a0d1a; --bg2:#6d1b3b; --bg3:#a8325c; --accent:#ff4d6d; }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: radial-gradient(1200px 800px at 20% -10%, #52142a, transparent 70%),
+                  linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+      color:#fff; padding:24px;
+    }
+    .card{
+      width:min(520px, 92vw); padding:28px 24px; text-align:center;
+      background:rgba(255,255,255,0.08); backdrop-filter: blur(6px);
+      border:1px solid rgba(255,255,255,0.15); border-radius:20px;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+      animation:fade .6s ease-out both;
+    }
+    h1{margin:0 0 12px; font-weight:800; letter-spacing:.3px}
+    p{opacity:.9; margin:0 0 18px}
+    .row{display:flex; gap:10px; justify-content:center; margin-top:8px}
+    input{
+      width:60%; padding:12px 14px; border-radius:12px; border:0; outline:0;
+      font-size:1rem; text-align:center;
+    }
+    .btn{
+      position:relative; overflow:visible; cursor:pointer; border:0;
+      padding:12px 18px; border-radius:999px; font-weight:700; font-size:1rem;
+      background:#fff; color:#7b113a; transition:transform .15s ease, box-shadow .2s ease;
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+    .btn:hover{ transform:translateY(-1px); }
+    .hint{font-size:.85rem; opacity:.7; margin-top:8px}
+    /* hearts on the button hover */
+    .btn::after{
+      content:"💖"; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+      opacity:.25; font-size:1.3rem; animation:beat 1.8s infinite ease-in-out;
+      pointer-events:none;
+    }
+    @keyframes beat { 0%,100%{transform:translate(-50%,-50%) scale(1)} 50%{transform:translate(-50%,-50%) scale(1.15)} }
+    @keyframes fade { from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none} }
+
+    /* tiny footer */
+    .mini{margin-top:12px; opacity:.5; font-size:.8rem}
+    /* heart particles */
+    .heart{
+      position:fixed; font-size:18px; pointer-events:none; filter:drop-shadow(0 6px 8px rgba(0,0,0,.3));
+      animation: float 900ms ease-out forwards;
+    }
+    @keyframes float{
+      to{ transform: translate(var(--dx), var(--dy)) scale(1.35); opacity:0; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Slide 1: Introduction with Poem -->
-        <div class="slide" id="slide1">
-            <h1>For My Eternal Fluke 💖</h1>
-            <div class="romantic-message">
-                <p>You're not perfect.</p>
-                <p>But your flaws are carved so beautifully into you</p>
-                <p>that they made me forget what imperfection even means.</p>
-                <br>
-                <p>I still crave your eyes when my lips find yours,</p>
-                <p>still melt under the breath you leave on my neck,</p>
-                <p>still ache to hold the little fingers</p>
-                <p>that once chose to walk with mine.</p>
-                <br>
-                <p>They say love should feel like home—</p>
-                <p>but no one warned me about the homelessness</p>
-                <p>that follows in your absence.</p>
-                <br>
-                <p>Darling, I am a poet who knows nothing</p>
-                <p>better than ink and madness.</p>
-                <p>My ink writes of you,</p>
-                <p>my madness dies for you.</p>
-                <br>
-                <p>If they ask, "Does he love you?"</p>
-                <p>Tell them, "He wrote me into eternity."</p>
-                <br>
-                <p>Because you are,</p>
-                <p>and always will be,</p>
-                <p>my eternal fluke.</p>
-            </div>
-            
-            <div class="rules-box">
-                <h2>Let's Play a Game! 🎮</h2>
-                <p>I will show you 3 photos of us and you have to guess the months we were in that time.</p>
-                <p>Depending on your answers, I will pass my judgment to you... I mean your gift! 😉</p>
-            </div>
-            
-            <button class="btn" id="playBtn">Let's Play!</button>
-        </div>
-        
-        <!-- Slide 2: First Photo -->
-        <div class="slide" id="slide2">
-            <h1>Our Beautiful Memory 💕</h1>
-            <div class="photo-container">
-                <div class="photo-frame">
-                    <!-- REPLACE THIS WITH YOUR FIRST PHOTO -->
-                    <!-- Change "photo1.jpg" to your actual filename -->
-                    <img src="IMP/ChatGPT Image Aug 23, 2025, 11_05_04 PM.jpg" alt="Our First Photo">
-                    <div class="photo-counter">1/3</div>
-                </div>
-            </div>
-            <div class="input-container">
-                <p>Guess the month for this photo (e.g., January, February):</p>
-                <input type="text" id="monthGuess1" placeholder="Enter month name">
-                <br>
-                <button class="btn" id="submitBtn1">Submit Answer</button>
-            </div>
-            <div class="message" id="responseMessage1"></div>
-            <div class="navigation-dots">
-                <div class="dot active" data-slide="2"></div>
-                <div class="dot" data-slide="3"></div>
-                <div class="dot" data-slide="4"></div>
-            </div>
-        </div>
-        
-        <!-- Slide 3: Second Photo -->
-        <div class="slide" id="slide3">
-            <h1>Another Special Moment 💕</h1>
-            <div class="photo-container">
-                <div class="photo-frame">
-                    <!-- REPLACE THIS WITH YOUR SECOND PHOTO -->
-                    <!-- Change "photo2.jpg" to your actual filename -->
-                    <img src="IMP/ChatGPT Image Apr 1, 2025, 10_44_02 PM.jpg" alt="Our Second Photo">
-                    <div class="photo-counter">2/3</div>
-                </div>
-            </div>
-            <div class="input-container">
-                <p>Guess the month for this photo (e.g., January, February):</p>
-                <input type="text" id="monthGuess2" placeholder="Enter month name">
-                <br>
-                <button class="btn" id="submitBtn2">Submit Answer</button>
-            </div>
-            <div class="message" id="responseMessage2"></div>
-            <div class="navigation-dots">
-                <div class="dot" data-slide="2"></div>
-                <div class="dot active" data-slide="3"></div>
-                <div class="dot" data-slide="4"></div>
-            </div>
-        </div>
-        
-        <!-- Slide 4: Third Photo -->
-        <div class="slide" id="slide4">
-            <h1>One More Precious Memory 💕</h1>
-            <div class="photo-container">
-                <div class="photo-frame">
-                    <!-- REPLACE THIS WITH YOUR THIRD PHOTO -->
-                    <!-- Change "photo3.jpg" to your actual filename -->
-                    <img src="IMP/file_0000000016bc520ab6b32ac57bb81e99.jpg" alt="Our Third Photo">
-                    <div class="photo-counter">3/3</div>
-                </div>
-            </div>
-            <div class="input-container">
-                <p>Guess the month for this photo (e.g., January, February):</p>
-                <input type="text" id="monthGuess3" placeholder="Enter month name">
-                <br>
-                <button class="btn" id="submitBtn3">Submit Answer</button>
-            </div>
-            <div class="message" id="responseMessage3"></div>
-            <div class="navigation-dots">
-                <div class="dot" data-slide="2"></div>
-                <div class="dot" data-slide="3"></div>
-                <div class="dot active" data-slide="4"></div>
-            </div>
-        </div>
-        
-        <!-- Slide 5: Judgement Time -->
-        <div class="slide" id="slide5">
-            <div class="judgement-text">
-                Time for your judgement...
-            </div>
-        </div>
-        
-        <!-- Slide 6: Gift Selection -->
-        <div class="slide" id="slide6">
-            <h1>Choose Your Gift 🎁</h1>
-            <p>Select one of the gift boxes to reveal your surprise!</p>
-            <div class="gift-container">
-                <div class="gift-box" id="gift1">
-                    <div class="gift-lid"></div>
-                    <div class="gift-bow"></div>
-                </div>
-                <div class="gift-box" id="gift2">
-                    <div class="gift-lid"></div>
-                    <div class="gift-bow"></div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Slide 7: Romantic Message -->
-        <div class="slide" id="slide7">
-            <h1>Happy Birthday My Love! 🎂🎉</h1>
-            <div class="romantic-message">
-                <p>Hi darling,</p>
-                <p>you are turning 19,</p>
-                <p>and we are completing our 6.</p>
-                <p>Still, it feels like I don't know you enough,</p>
-                <p>haven't worshipped you enough,</p>
-                <p>haven't whispered my prayers for you enough.</p>
-                <br>
-                <p>You are something—</p>
-                <p>or maybe my everything.</p>
-                <br>
-                <p>The answer to my every unsaid question,</p>
-                <p>the silence to my every chaos,</p>
-                <p>the warmth of my only home.</p>
-                <p>You are the chaos—</p>
-                <p>the beautiful, chaotic problem</p>
-                <p>I never want to solve,</p>
-                <p>because peace without you</p>
-                <p>would never feel like peace at all.</p>
-                <br>
-                <p>And if you are seeing this,</p>
-                <p>I guess I made you feel loved enough</p>
-                <p>to remember us.</p>
-                <br>
-                <p>Happy Birthday, darling.</p>
-                <p>From 19 to forever—</p>
-                <p>I love you always and forever,</p>
-                <p>and as my name says,</p>
-                <p>you will be eternally carved in it.</p>
-            </div>
-            <div class="signature">- Your Eternal Love</div>
-        </div>
-        
-        <!-- Bloody Message Overlay -->
-        <div class="bloody-message" id="bloodyMessage" style="display: none;">
-            WE NEED TO TALK DARLING
-            <div class="blood-drip" style="left: 20%; animation-delay: 0.5s;"></div>
-            <div class="blood-drip" style="left: 40%; animation-delay: 1s;"></div>
-            <div class="blood-drip" style="left: 60%; animation-delay: 1.5s;"></div>
-            <div class="blood-drip" style="left: 80%; animation-delay: 2s;"></div>
-        </div>
+  <div class="card">
+    <h1>💌 secret key to my heart</h1>
+    <p>psst… only you get to open this. type the magic word to continue.</p>
+    <div class="row">
+      <input id="pass" type="password" placeholder="enter password" autocomplete="off" />
+      <button class="btn" id="unlockBtn">unlock</button>
     </div>
-    
-    <div class="hearts" id="heartsContainer"></div>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // DOM Elements
-            const playBtn = document.getElementById('playBtn');
-            const submitBtn1 = document.getElementById('submitBtn1');
-            const submitBtn2 = document.getElementById('submitBtn2');
-            const submitBtn3 = document.getElementById('submitBtn3');
-            const gift1 = document.getElementById('gift1');
-            const gift2 = document.getElementById('gift2');
-            const bloodyMessage = document.getElementById('bloodyMessage');
-            const slides = document.querySelectorAll('.slide');
-            const monthGuess1 = document.getElementById('monthGuess1');
-            const monthGuess2 = document.getElementById('monthGuess2');
-            const monthGuess3 = document.getElementById('monthGuess3');
-            const responseMessage1 = document.getElementById('responseMessage1');
-            const responseMessage2 = document.getElementById('responseMessage2');
-            const responseMessage3 = document.getElementById('responseMessage3');
-            const heartsContainer = document.getElementById('heartsContainer');
-            const dots = document.querySelectorAll('.dot');
-            
-            // Correct answers for the photos
-            const correctAnswers = ['March', 'April', 'April'];
-            let currentSlide = 1;
-            let correctCount = 0;
-            
-            // Create hearts around the button
-            function createHearts() {
-                for (let i = 0; i < 20; i++) {
-                    setTimeout(() => {
-                        const heart = document.createElement('div');
-                        heart.classList.add('heart');
-                        heart.innerHTML = '❤';
-                        
-                        // Random position around the button
-                        const angle = Math.random() * Math.PI * 2;
-                        const distance = 100 + Math.random() * 100;
-                        const tx = Math.cos(angle) * distance;
-                        const ty = Math.sin(angle) * distance;
-                        
-                        heart.style.setProperty('--tx', `${tx}px`);
-                        heart.style.setProperty('--ty', `${ty}px`);
-                        
-                        // Random size
-                        const size = 15 + Math.random() * 15;
-                        heart.style.fontSize = `${size}px`;
-                        
-                        // Random start position
-                        const startX = 50 + Math.random() * 50;
-                        const startY = 50 + Math.random() * 50;
-                        heart.style.left = `${startX}%`;
-                        heart.style.top = `${startY}%`;
-                        
-                        heartsContainer.appendChild(heart);
-                        
-                        // Remove heart after animation
-                        setTimeout(() => {
-                            heart.remove();
-                        }, 5000);
-                    }, i * 200);
-                }
-            }
-            
-            // Create fireworks
-            function createFireworks() {
-                for (let i = 0; i < 100; i++) {
-                    setTimeout(() => {
-                        const firework = document.createElement('div');
-                        firework.classList.add('firework');
-                        
-                        // Random position
-                        const x = Math.random() * window.innerWidth;
-                        const y = Math.random() * window.innerHeight;
-                        
-                        // Random color
-                        const colors = ['#ff6b6b', '#ff8e8e', '#ffd7df', '#ff9a9e', '#fad0c4'];
-                        const color = colors[Math.floor(Math.random() * colors.length)];
-                        firework.style.backgroundColor = color;
-                        
-                        // Random animation parameters
-                        const animX = (Math.random() - 0.5) * 500;
-                        const animY = (Math.random() - 0.5) * 500;
-                        
-                        firework.style.setProperty('--x', `${animX}px`);
-                        firework.style.setProperty('--y', `${animY}px`);
-                        
-                        firework.style.left = `${x}px`;
-                        firework.style.top = `${y}px`;
-                        
-                        document.body.appendChild(firework);
-                        
-                        // Remove firework after animation
-                        setTimeout(() => {
-                            firework.remove();
-                        }, 1000);
-                    }, i * 50);
-                }
-            }
-            
-            // Show a specific slide
-            function showSlide(slideNumber) {
-                slides.forEach(slide => {
-                    slide.style.display = 'none';
-                });
-                document.getElementById(`slide${slideNumber}`).style.display = 'block';
-                currentSlide = slideNumber;
-                
-                // Update navigation dots if they exist on this slide
-                const dotsContainer = document.querySelector('.navigation-dots');
-                if (dotsContainer) {
-                    dots.forEach(dot => {
-                        dot.classList.remove('active');
-                        if (parseInt(dot.getAttribute('data-slide')) === slideNumber) {
-                            dot.classList.add('active');
-                        }
-                    });
-                }
-                
-                // If it's the judgement slide, show for 2 seconds then move to gifts
-                if (slideNumber === 5) {
-                    setTimeout(() => {
-                        showSlide(6);
-                    }, 2000);
-                }
-                
-                // Scroll to top when changing slides
-                window.scrollTo(0, 0);
-            }
-            
-            // Handle play button click
-            playBtn.addEventListener('click', function() {
-                // Create fireworks and hearts
-                createFireworks();
-                createHearts();
-                
-                // Transition to slide 2 after a delay
-                setTimeout(() => {
-                    showSlide(2);
-                }, 500);
-            });
-            
-            // Handle answer submission for photo 1
-            submitBtn1.addEventListener('click', function() {
-                checkAnswer(monthGuess1, correctAnswers[0], responseMessage1, 3);
-            });
-            
-            // Handle answer submission for photo 2
-            submitBtn2.addEventListener('click', function() {
-                checkAnswer(monthGuess2, correctAnswers[1], responseMessage2, 4);
-            });
-            
-            // Handle answer submission for photo 3
-            submitBtn3.addEventListener('click', function() {
-                checkAnswer(monthGuess3, correctAnswers[2], responseMessage3, 5);
-            });
-            
-            // Check if answer is correct and proceed
-            function checkAnswer(inputElement, correctAnswer, messageElement, nextSlide) {
-                const userAnswer = inputElement.value.trim();
-                
-                if (userAnswer === '') {
-                    messageElement.textContent = 'Please enter a month!';
-                    return;
-                }
-                
-                // Wait half second before transition
-                setTimeout(() => {
-                    if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-                        messageElement.innerHTML = '<div class="love-confirmation" style="font-size: 2.5rem; margin: 20px 0;">I know you loved me! ❤️</div>';
-                        correctCount++;
-                        
-                        // Create hearts for correct answer
-                        createHearts();
-                    } else {
-                        messageElement.innerHTML = '<div class="hate-message">I hate youu 😒😒😒</div>';
-                    }
-                    
-                    // Move to next slide after a short delay
-                    setTimeout(() => {
-                        showSlide(nextSlide);
-                    }, 1500);
-                }, 500);
-            }
-            
-            // Handle gift selection
-            gift1.addEventListener('click', function() {
-                handleGiftSelection();
-            });
-            
-            gift2.addEventListener('click', function() {
-                handleGiftSelection();
-            });
-            
-            function handleGiftSelection() {
-                // Show appropriate message based on correct answers
-                if (correctCount >= 2) {
-                    showSlide(7);
-                } else {
-                    // Show bloody message
-                    bloodyMessage.style.display = 'flex';
-                    
-                    // Hide after 6 seconds
-                    setTimeout(() => {
-                        bloodyMessage.style.display = 'none';
-                    }, 6000);
-                }
-            }
-            
-            // Navigation dots event listeners
-            dots.forEach(dot => {
-                dot.addEventListener('click', function() {
-                    const slideNumber = parseInt(this.getAttribute('data-slide'));
-                    showSlide(slideNumber);
-                });
-            });
-            
-            // Add some initial hearts
-            createHearts();
-        });
-    </script>
+    <div id="msg" class="hint"></div>
+    <div class="mini">hint: i’ll tell you 😉</div>
+  </div>
+
+  <script>
+    const PASSWORD = "mysecret"; // ← change this!
+    const btn = document.getElementById('unlockBtn');
+    const input = document.getElementById('pass');
+    const msg = document.getElementById('msg');
+
+    function burstHearts(fromEl){
+      const rect = fromEl.getBoundingClientRect();
+      for(let i=0;i<12;i++){
+        const h = document.createElement('div');
+        h.className = 'heart'; h.textContent='💖';
+        const x = rect.left + rect.width/2, y = rect.top + rect.height/2;
+        h.style.left = x+'px'; h.style.top = y+'px';
+        const angle = Math.random()*Math.PI*2;
+        const dist = 60 + Math.random()*90;
+        h.style.setProperty('--dx', Math.cos(angle)*dist + 'px');
+        h.style.setProperty('--dy', Math.sin(angle)*dist + 'px');
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(), 950);
+      }
+    }
+
+    function unlock(){
+      if(input.value.trim() === PASSWORD){
+        burstHearts(btn);
+        // small delay so she sees the hearts, then load main.html
+        setTimeout(()=> window.location.href = "main.html", 600);
+      }else{
+        msg.textContent = "❌ wrong password, try again";
+      }
+    }
+
+    btn.addEventListener('click', unlock);
+    input.addEventListener('keydown', (e)=>{ if(e.key==='Enter') unlock(); });
+  </script>
 </body>
 </html>
