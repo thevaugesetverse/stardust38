@@ -408,6 +408,75 @@
         }
     </style>
 </head>
+<canvas id="fireworks"></canvas>
+
+<script>
+  const canvas = document.getElementById('fireworks');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  function createFirework(x, y) {
+    let count = 100;
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: x,
+        y: y,
+        angle: Math.random() * 2 * Math.PI,
+        speed: Math.random() * 5 + 2,
+        radius: 2,
+        alpha: 1,
+        decay: Math.random() * 0.02 + 0.01,
+        color: `hsl(${Math.random() * 360}, 100%, 50%)`
+      });
+    }
+  }
+
+  function drawFireworks() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach((p, i) => {
+      p.x += Math.cos(p.angle) * p.speed;
+      p.y += Math.sin(p.angle) * p.speed;
+      p.alpha -= p.decay;
+
+      if (p.alpha <= 0) particles.splice(i, 1);
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.alpha;
+      ctx.fill();
+    });
+    requestAnimationFrame(drawFireworks);
+  }
+  drawFireworks();
+
+  // Click to create fireworks
+  window.addEventListener('click', (e) => {
+    createFirework(e.clientX, e.clientY);
+  });
+
+  // Auto fireworks every 2 seconds
+  setInterval(() => {
+    createFirework(Math.random() * canvas.width, Math.random() * canvas.height / 2);
+  }, 2000);
+</script>
+
+<style>
+  #fireworks {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 999;
+  }
+</style>
 <body>
     <div class="container">
         <!-- Slide 1: Introduction with Poem -->
